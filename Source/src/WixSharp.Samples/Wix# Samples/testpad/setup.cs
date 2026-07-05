@@ -47,9 +47,9 @@ namespace Test1.installer.wixsharp
 
         static void Main()
         {
+            issue_1936(); return;
             issue_1927(); return;
             issue_1917(); return;
-            issue_1900(); return;
             issue_1887(); return;
             issue_1864(); return;
             issue_1856();
@@ -57,15 +57,6 @@ namespace Test1.installer.wixsharp
             // issue_1739();
             // issue_1847();
             // discussions_1846();
-        }
-
-        class CustomSigner : DigitalSignature
-        {
-            public override int Apply(string fileToSign)
-            {
-                Console.WriteLine("Signing: " + fileToSign);
-                return 1;
-            }
         }
 
         static void issue_1917_2()
@@ -136,6 +127,27 @@ namespace Test1.installer.wixsharp
             WixGuid.Generator = GuidGenerators.CollisionFree;
 
             var msiFile = project.BuildMsi();
+        }
+
+        static void issue_1936()
+        {
+            var project = new Project("MyInstaller")
+            {
+                GUID = new Guid("0EA1F7B5-FEE2-448D-B7C7-42404E7DD848"),
+            };
+
+            var msiPath = Compiler.BuildMsi(project);
+
+            var msiPackage = new MsiPackage(msiPath);
+
+            var bundle = new Bundle("MyProduct", msiPackage)
+            {
+                OutFileName = "MyInstaller",
+                UpgradeCode = new Guid("82853838-7947-48C2-80CC-6004DA46D6BA"),
+                Version = new Version(1, 0)
+            };
+
+            bundle.Build();
         }
 
         static void issue_1900()
@@ -416,7 +428,7 @@ namespace Test1.installer.wixsharp
             build("1.0.2");
         }
 
-        static void Main2()
+        static void Test2()
         {
             Environment.CurrentDirectory = @"D:\dev\wixsharp4\Source\src\WixSharp.Samples\Wix# Samples\Install Files";
             var msixTemplate = @".\MyProduct.msix.xml";
@@ -451,7 +463,7 @@ namespace Test1.installer.wixsharp
             }
         }
 
-        static void Main1()
+        static void Test1()
         {
             var project = new ManagedProject(productName,
                               new Dir(@"%ProgramFiles%\" + companyName + @"\" + productName + @"\" + productVersion,
@@ -490,7 +502,7 @@ namespace Test1.installer.wixsharp
             project.BuildMsi();
         }
 
-        public static void Test1()
+        public static void Test3()
         {
             // return; // REMOVE THIS LINE TO ENABLE BUILDING
 
@@ -551,6 +563,15 @@ namespace Test1.installer.wixsharp
             //WixGuid.ConsistentGenerationStartValue = UpgradeCode;
 
             project.BuildMsi();
+        }
+
+        class CustomSigner : DigitalSignature
+        {
+            public override int Apply(string fileToSign)
+            {
+                Console.WriteLine("Signing: " + fileToSign);
+                return 1;
+            }
         }
 
         private static Dir CreateRevitAddinDir(int year)

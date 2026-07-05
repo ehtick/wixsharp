@@ -3681,6 +3681,7 @@ namespace WixSharp
             var output = Run(exe, args, out exitCode, workingDir, suppressEcho);
             return output;
         }
+
         internal static string Run(string exe, string args, out int exitCode, string workingDir = null, bool suppressEcho = false)
         {
             lock (WiX_Tools)
