@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
     <id>WixSharp.bin</id>
-    <version>2.14.0.0</version>
+    <version>2.14.1.0</version>
     <title>Wix# (WixSharp) - Binaries (targeting WiX3)</title>
     <authors>Oleg Shilo</authors>
     <owners>Oleg Shilo</owners>
@@ -16,14 +16,12 @@ The package contains Wix# binaries only.
 In order to use this package you need have WiX Toolset installed.
 The package is tested against WIX (Windows Installer Xml) Toolset v3.10 (v3.10.2103.0)</description>
     <summary>Wix# (WixSharp) - Binaries</summary>
-    <releaseNotes>Release v2.14.0.0
-
-- WixSharp-VS-Templates: updated nuget packeges refs to use the latest package available
-- #1857: .NET 9 Support ?
-- #1926: Added support for `DotNetCoreSearch` element
-  Add DotNetCoreSearch and dynamic AOT TFM selection
-- #1927: LGHT0369 "Component has a @Guid value that duplicates another component in this package." because of a GetHashCode32 collision
-  `WixGuid.Generator = GuidGenerators.CollisionFree;`</releaseNotes>
+    <releaseNotes>Release v2.14.1.0
+- #1937: Migrating from v3 to v4 automatic MSI authoring issue
+- #1933: WixTools.SfxCAFor return 64 bit property for !is64
+- #1928: [BUG]Adding a Extension DLL with a full path cuases a crash
+- Manifest's dependency pack Microsoft.Net.Component.4.7.2.TargetingPack is replaced with Microsoft.VisualStudio.Component.CoreEditor.
+This is to allow to install on both VS2022 and VS2026. Related to #1929.</releaseNotes>
     <copyright>Copyright (C) 2008-2022 Oleg Shilo</copyright>
     <language>en-AU</language>
     <tags>C# scripting msi install setup wix</tags>
