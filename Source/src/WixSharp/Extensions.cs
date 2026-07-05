@@ -3853,7 +3853,7 @@ namespace WixSharp
                 string localizedMsi = project.BuildMsi(language).PathGetFullPath();
                 string langMst = localizedMsi.PathChangeExtension(".mst");
 
-                "wix.exe".Run($"msi transform -p -t language \"{originalMsi}\" \"{localizedMsi}\" -out \"{langMst}\"");
+                Compiler.Run("wix.exe", $"msi transform -p -t language \"{originalMsi}\" \"{localizedMsi}\" -out \"{langMst}\"");
 
                 return langMst;
             }
