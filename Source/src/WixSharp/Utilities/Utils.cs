@@ -150,7 +150,7 @@ using System.Collections.Generic;
 [assembly: AssemblyFileVersion(""" + version + @""")]
 class Program
 {
-    static readonly string[] beforeArgKeys = { ""/i"", ""/a"", ""/ju"", ""/jm"", ""/j/g"", ""/j/t"", ""/x"" };
+    static readonly string[] beforeArgKeys = { ""/i"", ""/a"", ""/ju"", ""/jm"", ""/j/g"", ""/j/t"", ""/x"", ""/fp"", ""/fo"", ""/fe"", ""/fd"", ""/fc"", ""/fa"", ""/fu"", ""/fm"", ""/fs"", ""/fv"" };
 
     static int Main(string[] args)
     {
