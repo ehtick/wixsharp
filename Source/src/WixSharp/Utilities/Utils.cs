@@ -136,6 +136,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Reflection;
+using System.Collections.Generic;
 
 [assembly: AssemblyTitle(""" + outFile.PathGetFileName() + @""")]
 [assembly: AssemblyDescription(""Self-hosted " + outFile.PathGetFileNameWithoutExtension() + @".msi"")]
@@ -160,7 +161,7 @@ class Program
         try
         {
             ExtractMsi(msi);
-            
+
             IEnumerable<string> beforeMsiArgs = args.Where(arg => beforeArgKeys.Contains(arg));
             IEnumerable<string> afterMsiArgs = args.Except(beforeMsiArgs);
 
