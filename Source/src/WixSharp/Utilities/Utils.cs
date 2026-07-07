@@ -149,6 +149,8 @@ using System.Reflection;
 [assembly: AssemblyFileVersion(""" + version + @""")]
 class Program
 {
+    static readonly string[] beforeArgKeys = { ""/i"", ""/a"", ""/ju"", ""/jm"", ""/j/g"", ""/j/t"", ""/x"" };
+
     static int Main(string[] args)
     {
         // Debug.Assert(false);
@@ -158,9 +160,14 @@ class Program
         try
         {
             ExtractMsi(msi);
-            string msi_args = args.Any() ? string.Join("" "", args) : ""/i"";
+            
+            IEnumerable<string> beforeMsiArgs = args.Where(arg => beforeArgKeys.Contains(arg));
+            IEnumerable<string> afterMsiArgs = args.Except(beforeMsiArgs);
 
-            Process p = Process.Start(""msiexec.exe"", msi_args + "" \"""" + msi + ""\"""");
+            string msi_args = beforeMsiArgs.Any() ? string.Join("" "", beforeMsiArgs) : ""/i"";
+            string msi_args_after = string.Join("" "", afterMsiArgs);
+
+            Process p = Process.Start(""msiexec.exe"", msi_args + "" \"""" + msi + ""\"""" + msi_args_after);
             p.WaitForExit();
             return p.ExitCode;
         }
